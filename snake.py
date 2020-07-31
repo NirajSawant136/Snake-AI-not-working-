@@ -61,12 +61,6 @@ class Snake:
 
 		self.WALLS = WALLS1 + WALLS2 + WALLS3 + WALLS4
 
-		# print(self.WALLS)
-		# for part in self.WALLS:
-		# 	pygame.draw.rect(world, RED, ( (part[1] - self.Y)*SIZE + self.Y, (part[0] - self.X)*SIZE + self.X, SIZE, SIZE), 0)
-
-		# pygame.display.update()
-
 	def draw(self, world):
 		if self.index < 10:
 			for part in self.body:
@@ -82,9 +76,7 @@ class Snake:
 
 	def collideSelf(self, dirs):
 		snake_direction = (self.body[1][0] - self.body[0][0], self.body[1][1] - self.body[0][1])
-		
 
-	# Dir = next(x for x, op in enumerate(output) if op == 1)
 		Dir = 0
 		if dirs == (1, 0, 0):
 			Dir = -1
@@ -159,9 +151,6 @@ class Snake:
 
 	def move(self, output):
 		snake_direction = (self.body[1][0] - self.body[0][0], self.body[1][1] - self.body[0][1])
-		# print(snake_direction)
-
-		# Dir = next(x for x, op in enumerate(output) if op == 1)
 
 		if output == (1, 0, 0):
 			Dir = -1
@@ -267,25 +256,6 @@ def isClear(snake, Dir):
 	elif Dir == 1:
 		Dirs = (0, 0, 1)
 
-	# direction = 0
-
-	# if snake_direction[0] == 0:
-	# 	if snake_direction[1] == 1:
-	# 		direction = 3
-	# 	elif snake_direction[1] == -1:
-	# 		direction = 1
-
-	# elif snake_direction[1] == 0:
-	# 	if snake_direction[0] == 1:
-	# 		direction = 0
-	# 	elif snake_direction[0] == -1:
-	# 		direction = 2
-
-	# dirs = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-
-	# move = dirs[(direction + Dir) % 4]
-	# head = (snake.body[0][0] + move[0], snake.body[0][1] + move[1])
-
 	if snake.collideSelf(Dirs) or snake.collideWall(Dirs):
 		return 0
 
@@ -293,16 +263,7 @@ def isClear(snake, Dir):
 
 def whereIsFood(snake, food):
 	snake_direction = (snake.body[1][0] - snake.body[0][0], snake.body[1][1] - snake.body[0][1])
-		
 
-	# Dir = next(x for x, op in enumerate(output) if op == 1)
-
-	# if Dir == 0:
-	# 	Dir = -1
-	# elif Dir == 1:
-	# 	Dir = 0
-	# elif Dir == 2:
-	# 	Dir = 1
 	left = -1
 	forward = 0
 	right = 1
@@ -338,12 +299,6 @@ def whereIsFood(snake, food):
 
 	minDist = min(distLeft, distRight, distForward)
 
-	# print(head)
-	# print()
-	# print(headLeft)
-	# print(headRight)
-	# print(headForward)
-
 	Foods = []
 	if minDist == distLeft:
 		Foods = [1, 0, 0]
@@ -366,16 +321,6 @@ def finalDirection(snake, maxOutput):
 		Dir = 1
 
 	snake_direction = (snake.body[1][0] - snake.body[0][0], snake.body[1][1] - snake.body[0][1])
-		
-
-	# Dir = next(x for x, op in enumerate(output) if op == 1)
-
-	# if Dir == 0:
-	# 	Dir = -1
-	# elif Dir == 1:
-	# 	Dir = 0
-	# elif Dir == 2:
-	# 	Dir = 1
 
 	direction = 0
 
@@ -397,47 +342,6 @@ def finalDirection(snake, maxOutput):
 	head = (snake.body[0][0] + move[0], snake.body[0][1] + move[1])
 
 	return head
-
-
-# world = pygame.display.set_mode((5*BLOCK_SIZE, 2*BLOCK_SIZE))
-
-
-# drawGrid(world)
-# snake = Snake(4, 10, GRID[6], world)
-# snake.draw(world)
-# snake.move((1, 0, 0))
-# print(snake.body)
-# time.sleep(1.2)
-
-# food = Food(snake)
-# food.draw(world)
-# print(food.distance)
-
-# world.fill(BLACK)
-# drawGrid(world)
-# snake.draw(world)
-
-# while not snake.collideWall((0, 1, 0)):
-# 	time.sleep(1.2)
-# 	snake.move((0, 1, 0))
-# 	world.fill(BLACK)
-# 	drawGrid(world)
-# 	snake.draw(world)
-	
-
-# inputs = whereIsFood(snake, food)
-# inputs.append(isClear(snake, -1))
-# inputs.append(isClear(snake, 0))
-# inputs.append(isClear(snake, 1))
-
-# print(inputs)
-
-# run = True
-# while run:
-# 	for event in pygame.event.get():
-# 		if event.type == pygame.QUIT:
-# 			run = False
-# 			pygame.quit()
 
 def eval_genomes(genomes, config):
 	world = pygame.display.set_mode((5*BLOCK_SIZE, 2*BLOCK_SIZE))
@@ -488,29 +392,6 @@ def eval_genomes(genomes, config):
 			# 	print("O", end=" | ")
 
 			OP = (int(10*output[0]), int(10*output[1]), int(10*output[2]))
-
-			# print(OP, end="|")
-			# print(x, output, end = " || ")
-
-			# Choice = []
-			# if output == [0.0, 0.0, 0.0]:
-			# 	print("messed up!", end=" ,, ")
-			# 	if isClear(snake, -1) == 1:
-			# 		Choice.append(0)
-
-			# 	if isClear(snake, 0) == 1:
-			# 		Choice.append(1)
-
-			# 	if isClear(snake, 1) == 1:
-			# 		Choice.append(2)
-
-			# 	if len(Choice) > 0:
-			# 		maxOutput = random.choice(Choice)
-			# 	else:
-			# 		maxOutput = random.choice((0, 1, 2))
-
-			# else:
-			# 	maxOutput = next(x for x, op in enumerate(output) if op == max(output))
 
 			maxOutput = next(x for x, op in enumerate(output) if op == max(output))
 
